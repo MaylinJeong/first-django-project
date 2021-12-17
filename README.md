@@ -133,3 +133,20 @@ will focus on form processing and cutting down our code
     - ListView 라면 `<app name>/<model name>_list.html`
   - DetailView 에서는 `model` 변수를 할당해주면, `question` 변수가 자동으로 제공된다. 하지만 ListView일 경우, `question_list`로 변수가 생성된다.
     - 이걸 override 하고 싶으면 `context_object_name` 속성으로 원하는 값으로 대체해주면 된다.
+
+## Tutorial5
+
+Focus on automated **tests** for it
+
+- app 의 `polls.py` 에 테스트 코드를 작성하면 된다. 테스트를 실행하면, 가상의 db에서 model instance를 생성해서 테스트를 진행하게 된다. `assert`는 자바와 동일한 것 같다.
+- Test a View
+  - Django provides a **test Client**
+    ```
+    >>> from django.test import Client
+    >>> # create an instance of the client for our use
+    >>> client = Client()
+    ```
+- Further Tests
+  - 로그인한 유저에 따른 테스트
+  - Database 데이터의 유효성에 관한 테스트
+  - ☑ check for todo list
