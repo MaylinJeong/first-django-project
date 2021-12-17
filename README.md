@@ -74,3 +74,37 @@ Django Practice Following [Django Tutorial](https://docs.djangoproject.com/en/4.
     - `admin.site.register(Question)` 은 어디서 나온 코드인지 따라가 봤다.
     - /.venv/lib/python3.10/site-packages/django/contrib/admin
       - 이 경로에 sites.py 가 있고, `register` 메서드를 제공한다.
+
+## Tutorial3
+
+will focus on creating the public interface – “views.”
+To get from a URL to a view, Django uses what are known as ‘URLconfs’. A URLconf maps URL patterns to views.
+- for details.. [URL dispatcher](https://docs.djangoproject.com/en/4.0/topics/http/urls/)
+
+- 어떻게 URL을 해석하는지
+  - 먼저, `mysite.urls` 로 가서 url pattern 을 찾는다.
+  - 찾았다면, 해당 url에 remaning text 를 전달한다.
+- `views.py` 는 controller 역할을 한다 
+  ```python
+  def index(request):
+      latest_question_list = Question.objects.order_by('-pub_date')[:5]
+      output = ', '.join([q.question_text for q in latest_question_list])
+      return HttpResponse(output)
+  ```
+- The default settings file configures a DjangoTemplates backend whose APP_DIRS option is set to True. 이렇게 설정되어 있으면, <app 이름>/templates/ 아래부터 searching 하게된다.
+  - 따라서, polls/templates/polls/index.html 일 경우, polls/index.html 로 접근할 수 있게 된다.
+  - 추후 여러 templates 를 생성하게 되니까, 이렇게 naming 하는 것이 바람직하다.
+    > We need to be able to point Django at the right one, and the best way to ensure this is by namespacing them. That is, by putting those templates inside another directory named for the application itself.
+
+- html 에서 url 접근하는 방법
+  - 하드 코딩하지 말고, polls/urls.py 에서 path() function을 기입하면, html 에서 `{% url %}` 로 접근가능하다
+    ```python
+    urlpatterns = [
+        path('', views.index, name='index'),
+        # /polls/5
+        path('<int:question_id>/', views.detail, name="detail"),
+        # /polls/5/results/
+        path('<int:question_id>/results/', views.results, name='results'),
+        path('<int:question_id>/vote/', views.vote, name='vote'),
+    ]
+    ```
