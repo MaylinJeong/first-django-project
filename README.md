@@ -120,3 +120,16 @@ will focus on form processing and cutting down our code
   - `urls.py` 에 명시되어 있는 path() 를 사용해서 url 를 하드코딩 하지 않아도 된다.
 - 현재 tutorial 버전으로는 vote 의 count를 계산하는 데 race condition 이 생긴다.
   - for details.. [Avoiding race conditions using F()](https://docs.djangoproject.com/en/4.0/ref/models/expressions/#avoiding-race-conditions-using-f)
+
+
+- generic views system
+  - common system that loading a template and returning the rendered template
+    - Convert the URLconf
+    - Delete some of the old, unneeded views
+    - Introduce new views based on Django's generic views
+  - DetailView
+    - 만약 `template_name` 변수를 할당하지 않으면, 자동으로 `<app name>/<model name>_detail.html` 을 찾게된다.
+  - ListView
+    - ListView 라면 `<app name>/<model name>_list.html`
+  - DetailView 에서는 `model` 변수를 할당해주면, `question` 변수가 자동으로 제공된다. 하지만 ListView일 경우, `question_list`로 변수가 생성된다.
+    - 이걸 override 하고 싶으면 `context_object_name` 속성으로 원하는 값으로 대체해주면 된다.
