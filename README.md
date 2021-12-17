@@ -108,3 +108,15 @@ To get from a URL to a view, Django uses what are known as ‘URLconfs’. A URL
         path('<int:question_id>/vote/', views.vote, name='vote'),
     ]
     ```
+    
+  
+## Tutorial4
+
+will focus on form processing and cutting down our code
+
+- CQRS 보안 이슈를 방지하기 위해 `{% csrf_token %}` 를 쓰면 Django에서 자동으로 protect 해준다.
+- `reverse`
+  - If you need to use something similar to the url template tag in your code, Django provides the following function: `reverse(viewname, urlconf=None, args=None, kwargs=None, current_app=None)`
+  - `urls.py` 에 명시되어 있는 path() 를 사용해서 url 를 하드코딩 하지 않아도 된다.
+- 현재 tutorial 버전으로는 vote 의 count를 계산하는 데 race condition 이 생긴다.
+  - for details.. [Avoiding race conditions using F()](https://docs.djangoproject.com/en/4.0/ref/models/expressions/#avoiding-race-conditions-using-f)
