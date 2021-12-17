@@ -150,3 +150,11 @@ Focus on automated **tests** for it
   - 로그인한 유저에 따른 테스트
   - Database 데이터의 유효성에 관한 테스트
   - ☑ check for todo list
+
+## Tutorial6
+
+stylesheet 으로 웹 커스터마이징
+
+`django.contrib.staticfiles` : collects static files from each of our applications into a single location that can easily be served in production
+
+path 는 templates 과 동일하게 app level 로 넣어주면 된다.
