@@ -158,3 +158,23 @@ stylesheet 으로 웹 커스터마이징
 `django.contrib.staticfiles` : collects static files from each of our applications into a single location that can easily be served in production
 
 path 는 templates 과 동일하게 app level 로 넣어주면 된다.
+
+
+## Tutorial7
+
+will focus on customizing admin site
+
+- Django knows that a **ForeignKey** should be represented in the admin as a <select> box
+- admin.ModelAdmin
+  - fields : 어드민 페이지에서 노출될 필드들을 customize
+  - fieldsets : 노출될 필드들을 grouping 할 수 있음
+  - inlines : `StackedInline` 을 상속받아서, inline 을 추가할 수 있음
+    - StackedInline
+    - TabularInline
+  - list_display : model 의 str()로 표현되는 text 이외에 다른 field 를 노출할 수 있다.
+  - `@admin.display` : def 함수 위에 선언해서 decorate 할 수 있다. [ModelAdmin.list_display](https://docs.djangoproject.com/en/4.0/ref/contrib/admin/#django.contrib.admin.ModelAdmin.list_display)
+  - list_filter : field 를 조건으로 검색할 수 있게 해준다. (Django 에서 type 을 보고 그 기준을 따라서 DF 조건들을 만들어준다.)
+  - search_field : `LIKE` 쿼리를 호출한다.
+
+- Customize project's templates
+  - `BASE_DIR / 'templates'` : DIRS is a list of filesystem directories to check when loading Django templates; it’s a search path.
